@@ -1,4 +1,5 @@
 import * as express from 'express';
+import loginRouter from './router/login.router';
 
 class App {
   public app: express.Express;
@@ -7,7 +8,7 @@ class App {
   constructor() {
     this.app = express();
     this.config();
-    // ...
+    this.routers();
   }
 
   private config():void {
@@ -22,7 +23,10 @@ class App {
     this.app.use(express.json());
   }
 
-  // ...
+  private routers(): void {
+    this.app.use('login', loginRouter);
+  }
+
   public start(PORT: string | number):void {
     this.app.listen(PORT, () => console.log(`Servidor rodando na porta: ${PORT}`));
   }
