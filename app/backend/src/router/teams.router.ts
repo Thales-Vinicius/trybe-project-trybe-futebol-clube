@@ -8,4 +8,9 @@ teams.get(
   TeamsController.getAll,
 );
 
+teams.get(
+  '/:id',
+  TeamsController.getById,
+);
+
 export default teams;
