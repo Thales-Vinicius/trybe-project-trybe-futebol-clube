@@ -3,10 +3,10 @@ import Login from '../services/login.service';
 import * as jwt from '../utils/jwtGenerator';
 
 export default class LoginController {
-  public static async create(req: Request, res: Response) {
+  public static async getLogin(req: Request, res: Response) {
     const { email, password } = req.body;
 
-    const user = await Login.create(email, password);
+    const user = await Login.getLogin(email, password);
 
     if (!user) return res.status(401).json({ message: 'Incorrect email or password' });
 
@@ -18,10 +18,10 @@ export default class LoginController {
   public static async validate(req: Request, res: Response) {
     const token = req.headers.authorization;
 
-    if (!token) return res.status(401).json({ message: 'Invalid user error' });
+    if (!token) return res.status(401).json({ message: 'Invalid token' });
 
-    const { role } = await jwt.decryptToken(token);
+    const tokenData = await jwt.decryptToken(token);
 
-    return res.status(200).json(role);
+    return res.status(200).json(tokenData.role);
   }
 }

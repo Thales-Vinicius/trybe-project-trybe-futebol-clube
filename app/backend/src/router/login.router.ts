@@ -8,7 +8,7 @@ login.post(
   '/',
   emailValidation,
   passwordValidation,
-  LoginController.create,
+  LoginController.getLogin,
 );
 
 login.get(
