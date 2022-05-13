@@ -7,6 +7,12 @@ interface ICreateMatch {
   awayTeamGoals: number;
 }
 
+interface IUpdateMatch {
+  id: string;
+  homeTeamGoals: number;
+  awayTeamGoals: number;
+}
+
 export default class MatchesService {
   public static async getAll() {
     const allMatches = await Matches.findAll({ include: [{
@@ -55,6 +61,12 @@ export default class MatchesService {
     const inProgress = false;
 
     await Matches.update({ inProgress }, { where: { id } });
+
+    return id;
+  }
+
+  public static async update({ id, homeTeamGoals, awayTeamGoals }: IUpdateMatch) {
+    await Matches.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
 
     return id;
   }

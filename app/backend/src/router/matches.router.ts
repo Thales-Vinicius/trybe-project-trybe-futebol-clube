@@ -22,4 +22,9 @@ matches.patch(
   MatchesController.finish,
 );
 
+matches.patch(
+  '/:id',
+  MatchesController.update,
+);
+
 export default matches;

@@ -33,8 +33,19 @@ export default class MatchesController {
 
     const editMatch = await MatchesService.finish(Number(id));
 
-    if (!editMatch) return res.status(401).json({ message: 'Match not found' });
+    if (!editMatch) return res.status(401).json({ message: 'not found' });
 
     return res.status(200).json({ message: 'end game' });
+  }
+
+  public static async update(req: Request, res: Response) {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+
+    const editMatch = await MatchesService.update({ id, homeTeamGoals, awayTeamGoals });
+
+    if (!editMatch) return res.status(401).json({ message: 'not found' });
+
+    return res.status(200).json({ message: 'game updated' });
   }
 }
