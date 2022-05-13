@@ -7,13 +7,16 @@ export default class Login {
 
     if (!user) return null;
 
-    const validatePassword = await (!bcrypt.compare(password, user.password));
+    const isValidatePassword = (bcrypt.compareSync(password, user.password));
 
-    if (!validatePassword) return null;
+    if (!isValidatePassword) return null;
 
-    const { id, username, role } = user;
-
-    const userData = { id, username, email, role };
+    const userData = {
+      id: user.id,
+      username: user.username,
+      role: user.role,
+      email: user.email,
+    };
 
     return userData;
   }

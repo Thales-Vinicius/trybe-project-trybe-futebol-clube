@@ -9,7 +9,7 @@ interface IUser {
 }
 
 const jwtConfig = {
-  expiresIn: '1d',
+  expiresIn: '7d',
 };
 
 const encryptToken = async (data: IUser) => {

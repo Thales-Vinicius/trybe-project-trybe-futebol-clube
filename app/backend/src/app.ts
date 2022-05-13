@@ -8,7 +8,6 @@ class App {
   constructor() {
     this.app = express();
     this.config();
-    this.routers();
   }
 
   private config():void {
@@ -21,16 +20,17 @@ class App {
 
     this.app.use(accessControl);
     this.app.use(express.json());
+    this.routers();
+  }
+
+  public start(PORT: string | number):void {
+    this.app.listen(PORT, () => console.log(`Servidor rodando na porta: ${PORT}`));
   }
 
   private routers(): void {
     this.app.use('/login', loginRouter);
     this.app.use('/teams', teamsRouter);
     this.app.use('/matches', matchesRouter);
-  }
-
-  public start(PORT: string | number):void {
-    this.app.listen(PORT, () => console.log(`Servidor rodando na porta: ${PORT}`));
   }
 }
 

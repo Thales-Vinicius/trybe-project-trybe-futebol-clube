@@ -1,4 +1,5 @@
 import { Router } from 'express';
+// import tokenValidate from '../middlewares/token.middleware';
 import LoginController from '../controllers/login.controller';
 import { emailValidation, passwordValidation } from '../middlewares/login.middlewares';
 
