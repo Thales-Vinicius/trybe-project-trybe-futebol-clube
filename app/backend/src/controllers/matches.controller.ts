@@ -8,8 +8,6 @@ export default class MatchesController {
     if (inProgress === undefined) {
       const matches = await MatchesService.getAll();
 
-      // if (!matches) return res.status(401).json({ message: 'Match not found' });
-
       return res.status(200).json(matches);
     }
 
@@ -18,5 +16,25 @@ export default class MatchesController {
     const matches = await MatchesService.matchesInProgress(param);
 
     return res.status(200).json(matches);
+  }
+
+  public static async create(req: Request, res: Response) {
+    const { body } = req;
+
+    const match = await MatchesService.create(body);
+
+    if (!match) return res.status(401).json({ message: 'Incorrect or invalid match' });
+
+    return res.status(201).json(match);
+  }
+
+  public static async finish(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const editMatch = await MatchesService.finish(Number(id));
+
+    if (!editMatch) return res.status(401).json({ message: 'Match not found' });
+
+    return res.status(200).json({ message: 'end game' });
   }
 }

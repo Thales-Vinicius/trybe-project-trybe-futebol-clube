@@ -1,5 +1,12 @@
 import { Matches, Teams } from '../database/models';
 
+interface ICreateMatch {
+  homeTeam: number;
+  awayTeam: number;
+  homeTeamGoals: number;
+  awayTeamGoals: number;
+}
+
 export default class MatchesService {
   public static async getAll() {
     const allMatches = await Matches.findAll({ include: [{
@@ -30,5 +37,25 @@ export default class MatchesService {
     });
 
     return allMatches;
+  }
+
+  public static async create(dataMatch: ICreateMatch) {
+    const match = await Matches.create({
+      homeTeam: dataMatch.homeTeam,
+      awayTeam: dataMatch.awayTeam,
+      homeTeamGoals: dataMatch.homeTeamGoals,
+      awayTeamGoals: dataMatch.awayTeamGoals,
+      inProgress: true,
+    });
+
+    return match;
+  }
+
+  public static async finish(id: number) {
+    const inProgress = false;
+
+    await Matches.update({ inProgress }, { where: { id } });
+
+    return id;
   }
 }
