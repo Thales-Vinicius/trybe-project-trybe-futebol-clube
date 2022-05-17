@@ -1,17 +1,5 @@
+import { ICreateMatch, IUpdateMatch } from '../interfaces/Match';
 import { Matches, Teams } from '../database/models';
-
-interface ICreateMatch {
-  homeTeam: number;
-  awayTeam: number;
-  homeTeamGoals: number;
-  awayTeamGoals: number;
-}
-
-interface IUpdateMatch {
-  id: string;
-  homeTeamGoals: number;
-  awayTeamGoals: number;
-}
 
 export default class MatchesService {
   public static async getAll() {
