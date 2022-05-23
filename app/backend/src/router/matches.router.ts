@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import tokenValidate from '../middlewares/token.middleware';
+// import tokenValidate from '../middlewares/token.middleware';
 import MatchesController from '../controllers/matches.controller';
 import matchValidate from '../middlewares/matches.middlewares';
 
@@ -12,7 +12,7 @@ matches.get(
 
 matches.post(
   '/',
-  tokenValidate,
+  // tokenValidate,
   matchValidate,
   MatchesController.create,
 );
